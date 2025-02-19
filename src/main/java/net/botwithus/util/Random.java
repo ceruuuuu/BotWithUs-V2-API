@@ -5,10 +5,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Rand {
+public class Random {
 
     public static int nextInt() {
-        return nextInt(0, 2147483647);
+        return nextInt(0, Integer.MAX_VALUE);
     }
 
     public static int nextInt(int max) {

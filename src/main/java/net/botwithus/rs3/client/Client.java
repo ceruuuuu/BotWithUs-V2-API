@@ -5,7 +5,7 @@ import net.botwithus.rs3.world.ClientState;
 
 public sealed abstract class Client permits MutableClient {
 
-    public static int getClientCycle() {
+    public static int getCycle() {
         return MutableClient.CLIENT_CYCLE;
     }
 
@@ -13,8 +13,7 @@ public sealed abstract class Client permits MutableClient {
         return MutableClient.SERVER_TICK;
     }
 
-    public static ClientState getClientState() {
+    public static ClientState getState() {
         return ClientState.fromId(MutableClient.CLIENT_STATE);
     }
-
 }

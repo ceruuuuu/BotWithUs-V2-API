@@ -1,4 +1,4 @@
-package net.botwithus.rs3.inventories.events;
+package net.botwithus.events.types;
 
 import net.botwithus.events.Event;
 import net.botwithus.rs3.inventories.Inventory;

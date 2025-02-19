@@ -1,6 +1,9 @@
 package net.botwithus.services;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.ServiceLoader;
 
 public final class ServiceProvider {
     private static final Map<Class<?>, Object> INSTANCES = new HashMap<>();

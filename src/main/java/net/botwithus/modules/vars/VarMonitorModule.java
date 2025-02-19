@@ -1,5 +1,6 @@
 package net.botwithus.modules.vars;
 
+import net.botwithus.events.types.VarpEvent;
 import net.botwithus.imgui.ImFlags;
 import net.botwithus.imgui.ImGui;
 import net.botwithus.modules.BotModule;
@@ -190,7 +191,7 @@ public class VarMonitorModule implements BotModule {
     }
 
     private void sendEvent(int varId, int oldValue, int value, boolean isVarbit) {
-        VarChangeEvent event = new VarChangeEvent(varId, oldValue, value, isVarbit);
+        VarpEvent event = new VarpEvent(varId, oldValue, value, isVarbit);
         if (RepositoryRegistry.hasOtherRepositories()) {
             for (ScriptRepository repository : RepositoryRegistry.getRepositories()) {
                 repository.receiveEvent(event);

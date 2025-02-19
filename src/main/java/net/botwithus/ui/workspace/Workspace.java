@@ -1,8 +1,6 @@
 package net.botwithus.ui.workspace;
 
-import net.botwithus.imgui.ImGui;
 import net.botwithus.logging.ConsoleHandler;
-import net.botwithus.scripts.Script;
 
 import java.util.ArrayList;
 import java.util.List;

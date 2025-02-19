@@ -3,7 +3,6 @@ package net.botwithus.rs3.cache;
 import java.nio.ByteBuffer;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
 

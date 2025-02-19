@@ -1,6 +1,6 @@
 package net.botwithus.rs3.cache;
 
-import net.botwithus.rs3.cache.assets.providers.*;
+import net.botwithus.rs3.cache.assets.providers.VarProvider;
 import net.botwithus.rs3.cache.assets.vars.VarType;
 import net.botwithus.rs3.cache.sqlite.SqliteFilesystem;
 import org.junit.jupiter.api.Test;

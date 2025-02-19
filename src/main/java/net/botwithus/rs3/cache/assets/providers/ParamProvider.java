@@ -5,8 +5,8 @@ import net.botwithus.rs3.cache.ArchiveFile;
 import net.botwithus.rs3.cache.Filesystem;
 import net.botwithus.rs3.cache.ReferenceTable;
 import net.botwithus.rs3.cache.assets.ConfigProvider;
-import net.botwithus.rs3.cache.assets.params.ParamLoader;
 import net.botwithus.rs3.cache.assets.params.ParamDefinition;
+import net.botwithus.rs3.cache.assets.params.ParamLoader;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;

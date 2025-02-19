@@ -1,8 +1,8 @@
 package net.botwithus.rs3.login.internal;
 
-import net.botwithus.rs3.login.GameWorld;
+import net.botwithus.rs3.login.World;
 
-public final class MutableGameWorld extends GameWorld {
+public final class MutableWorld extends World {
 
     public void setWorldId(int worldId) {
         this.worldId = worldId;

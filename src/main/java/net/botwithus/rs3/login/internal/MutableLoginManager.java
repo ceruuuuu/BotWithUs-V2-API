@@ -7,7 +7,7 @@ import java.util.Map;
 
 public final class MutableLoginManager extends LoginManager {
 
-    public static final Map<Integer, MutableGameWorld> GAME_WORLDS = new HashMap<>();
+    public static final Map<Integer, MutableWorld> GAME_WORLDS = new HashMap<>();
 
     public static int LOGIN_PROGRESS = 0;
 

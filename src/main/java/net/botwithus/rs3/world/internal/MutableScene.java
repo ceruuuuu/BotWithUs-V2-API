@@ -5,15 +5,14 @@ import net.botwithus.rs3.entities.internal.MutableItemStack;
 import net.botwithus.rs3.entities.internal.MutableProjectile;
 import net.botwithus.rs3.entities.internal.MutableSceneObject;
 import net.botwithus.rs3.entities.internal.MutableSpotAnimation;
-import net.botwithus.rs3.login.internal.MutableGameWorld;
-import net.botwithus.rs3.world.World;
+import net.botwithus.rs3.world.Scene;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public final class MutableWorld extends World {
+public final class MutableScene extends Scene {
 
     public static final Map<Integer, PathingEntity> NPCS = new HashMap<>();
 

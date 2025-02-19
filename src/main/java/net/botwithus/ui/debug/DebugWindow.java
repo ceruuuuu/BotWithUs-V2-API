@@ -2,16 +2,14 @@ package net.botwithus.ui.debug;
 
 import net.botwithus.imgui.ImFlags;
 import net.botwithus.imgui.ImGui;
-import net.botwithus.rs3.entities.LocalPlayer;
 import net.botwithus.rs3.entities.PathingEntity;
 import net.botwithus.rs3.entities.SceneObject;
-import net.botwithus.rs3.world.World;
+import net.botwithus.rs3.world.Scene;
 import net.botwithus.ui.workspace.ExtInfo;
 import net.botwithus.ui.workspace.Workspace;
 import net.botwithus.ui.workspace.WorkspaceExtension;
 
 import java.util.Collection;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -73,7 +71,7 @@ public final class DebugWindow implements WorkspaceExtension {
     public void drawSceneObjectDebug(Workspace workspace) {
         // Draw the Scene Object debug window
         if (ImGui.begin("Scene Object Debug", 0)) {
-            Collection<SceneObject> sceneObjects = World.getSceneObjects();
+            Collection<SceneObject> sceneObjects = Scene.getSceneObjects();
 
             sceneObjectName = ImGui.inputText("Scene Object Name", sceneObjectName, 0);
             sceneObjectTypeId = ImGui.inputInt("Scene Object Type ID", sceneObjectTypeId, 1, 1, 0);
@@ -94,7 +92,7 @@ public final class DebugWindow implements WorkspaceExtension {
                 filter = filter.or(sceneObject -> sceneObject.getTypeId() == sceneObjectTypeId);
             }
             if(sceneObjectDistance > 0) {
-                filter = filter.or(sceneObject -> Objects.requireNonNull(LocalPlayer.self()).distanceTo(sceneObject.getCoordinate()) <= sceneObjectDistance);
+                filter = filter.or(sceneObject -> sceneObject.distance() <= sceneObjectDistance);
             }
 
             ImGui.separatorText("Scene Objects");
@@ -128,7 +126,7 @@ public final class DebugWindow implements WorkspaceExtension {
     public void drawNpcDebug(Workspace workspace) {
         // Draw the NPC debug window
         if (ImGui.begin("NPC Debug", 0)) {
-            Collection<PathingEntity> npcs = World.getNpcs();
+            Collection<PathingEntity> npcs = Scene.getNpcs();
 
             npcName = ImGui.inputText("NPC Name", npcName, 0);
             npcTypeId = ImGui.inputInt("NPC Type ID", npcTypeId, 1, 1, 0);
@@ -159,7 +157,7 @@ public final class DebugWindow implements WorkspaceExtension {
                             continue;
                         }
                         if(npcDistance > 0) {
-                            double v = Objects.requireNonNull(LocalPlayer.self()).distanceTo(npc.getCoordinate());
+                            double v = npc.distance();
                             if(v > npcDistance) {
                                 continue;
                             }

@@ -1,9 +1,10 @@
 package net.botwithus.rs3.entities;
 
+import net.botwithus.rs3.entities.types.EntityType;
 import net.botwithus.rs3.vars.VarDomain;
 import net.botwithus.rs3.world.Area;
 import net.botwithus.rs3.world.Coordinate;
-import net.botwithus.rs3.world.Direction;
+import net.botwithus.rs3.world.Distance;
 import net.botwithus.rs3.world.Locatable;
 import net.botwithus.services.ServiceProvider;
 
@@ -63,7 +64,7 @@ public abstract class LocalPlayer extends PathingEntity {
     @Override
     public Coordinate getCoordinate() {
         var player = getPlayer();
-        return player != null ? player.getCoordinate() : null;
+        return player != null ? player.getCoordinate() : Coordinate.ZERO;
     }
 
     @Override
@@ -85,21 +86,14 @@ public abstract class LocalPlayer extends PathingEntity {
     }
 
     @Override
-    public Direction getDirection() {
-        var player = getPlayer();
-        return player != null ? player.getDirection() : null;
-    }
-
-    @Override
     public Area getArea() {
         var player = getPlayer();
-        return player != null ? player.getArea() : null;
+        return player != null ? player.getArea() : new Area.Singular(Coordinate.ZERO);
     }
 
     @Override
-    public double distanceTo(Locatable target) {
-        var player = getPlayer();
-        return player != null ? player.distanceTo(target) : -1;
+    public double distance(Locatable target) {
+        return Distance.between(getPlayer(), target);
     }
 
     @Override
@@ -111,7 +105,7 @@ public abstract class LocalPlayer extends PathingEntity {
     @Override
     public List<String> getOptions() {
         var player = getPlayer();
-        return player != null ? player.getOptions() : null;
+        return player != null ? player.getOptions() : Collections.emptyList();
     }
 
     @Override
@@ -123,7 +117,7 @@ public abstract class LocalPlayer extends PathingEntity {
     @Override
     public Collection<Headbar> getHeadbars() {
         var player = getPlayer();
-        return player != null ? player.getHeadbars() : null;
+        return player != null ? player.getHeadbars() : Collections.emptyList();
     }
 
     @Override
@@ -135,7 +129,7 @@ public abstract class LocalPlayer extends PathingEntity {
     @Override
     public Collection<Hitmark> getHitmarks() {
         var player = getPlayer();
-        return player != null ? player.getHitmarks() : null;
+        return player != null ? player.getHitmarks() : Collections.emptyList();
     }
 
     @Override

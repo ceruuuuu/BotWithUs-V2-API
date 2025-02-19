@@ -1,6 +1,7 @@
 package net.botwithus.rs3.entities;
 
 import net.botwithus.rs3.entities.internal.MutableItemStack;
+import net.botwithus.rs3.entities.types.EntityType;
 import net.botwithus.rs3.item.Item;
 import net.botwithus.rs3.item.internal.MutableItem;
 
@@ -24,6 +25,6 @@ public abstract sealed class ItemStack extends Entity implements Iterable<Item> 
 
     @Override
     public Iterator<Item> iterator() {
-        return ((List<Item>) new ArrayList<Item>(this.items)).iterator();
+        return new ArrayList<Item>(this.items).iterator();
     }
 }

@@ -1,13 +1,13 @@
 package net.botwithus.rs3.entities.internal;
 
 import net.botwithus.rs3.cache.assets.items.StackType;
-import net.botwithus.rs3.entities.EntityType;
 import net.botwithus.rs3.entities.ItemStack;
+import net.botwithus.rs3.entities.types.EntityType;
 import net.botwithus.rs3.item.Item;
 import net.botwithus.rs3.item.internal.MutableItem;
 import net.botwithus.rs3.world.Area;
-import net.botwithus.rs3.world.Direction;
 import net.botwithus.rs3.world.Coordinate;
+import net.botwithus.rs3.world.Direction;
 
 public final class MutableItemStack extends ItemStack {
     public MutableItemStack(EntityType type) {

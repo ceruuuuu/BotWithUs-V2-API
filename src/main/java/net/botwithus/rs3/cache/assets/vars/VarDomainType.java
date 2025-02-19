@@ -17,6 +17,11 @@ public enum VarDomainType {
     VarDomainType(int id) {
         this.id = id;
     }
+
+    public int getId() {
+        return id;
+    }
+
     public static VarDomainType fromId(int id) {
         for (VarDomainType domain : domains) {
             if (domain.getId() == id) {
@@ -24,9 +29,5 @@ public enum VarDomainType {
             }
         }
         return VarDomainType.PLAYER;
-    }
-
-    public int getId() {
-        return id;
     }
 }

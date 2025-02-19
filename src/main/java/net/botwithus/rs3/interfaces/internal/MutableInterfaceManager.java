@@ -1,6 +1,5 @@
 package net.botwithus.rs3.interfaces.internal;
 
-import net.botwithus.rs3.interfaces.Interface;
 import net.botwithus.rs3.interfaces.InterfaceManager;
 
 import java.util.HashMap;

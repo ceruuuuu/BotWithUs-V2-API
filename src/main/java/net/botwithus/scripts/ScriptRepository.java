@@ -2,7 +2,6 @@ package net.botwithus.scripts;
 
 import net.botwithus.events.Event;
 
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.List;
 

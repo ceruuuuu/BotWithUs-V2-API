@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
-public interface Interactive {
+public interface Interactable {
 
     List<String> getOptions();
 
-    boolean interact(int option);
+    boolean interact(int index);
 
     default boolean interact() {
         return interact(0);

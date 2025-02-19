@@ -1,8 +1,7 @@
 package net.botwithus.rs3.world;
 
-import net.botwithus.util.Rand;
+import net.botwithus.util.Random;
 
-import java.util.List;
 import java.util.*;
 
 /**
@@ -84,7 +83,7 @@ public abstract sealed class Area implements Locatable permits Area.Singular, Ar
 
     public Coordinate getRandomCoordinate() {
         var coords = getCoordinates();
-        return coords.get(Rand.nextInt(coords.size()));
+        return coords.get(Random.nextInt(coords.size()));
     }
 
     public abstract Area.Rectangular toRectangular();
@@ -179,8 +178,8 @@ public abstract sealed class Area implements Locatable permits Area.Singular, Ar
         @Override
         public Coordinate getRandomCoordinate() {
             return new Coordinate(
-                    bottomLeft.x() + Rand.nextInt(getBottomRight().x() - bottomLeft.x()),
-                    bottomLeft.y() + Rand.nextInt(getTopLeft().y() - bottomLeft.y()),
+                    bottomLeft.x() + Random.nextInt(getBottomRight().x() - bottomLeft.x()),
+                    bottomLeft.y() + Random.nextInt(getTopLeft().y() - bottomLeft.y()),
                     bottomLeft.z()
             );
         }
@@ -355,7 +354,7 @@ public abstract sealed class Area implements Locatable permits Area.Singular, Ar
         @Override
         public Coordinate getRandomCoordinate() {
             // Calculate a random angle between 0 and 360 degrees
-            double randomAngle = Math.toRadians(Rand.nextDouble(0, 360));
+            double randomAngle = Math.toRadians(Random.nextDouble(0, 360));
 
             // Calculate the random x and y coordinates on the circumference of the circle
             int x = (int) Math.round(center.x() + radius * Math.cos(randomAngle));

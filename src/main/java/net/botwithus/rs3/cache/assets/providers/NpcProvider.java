@@ -5,8 +5,8 @@ import net.botwithus.rs3.cache.ArchiveFile;
 import net.botwithus.rs3.cache.Filesystem;
 import net.botwithus.rs3.cache.ReferenceTable;
 import net.botwithus.rs3.cache.assets.ConfigProvider;
-import net.botwithus.rs3.cache.assets.npcs.NpcLoader;
 import net.botwithus.rs3.cache.assets.npcs.NpcDefinition;
+import net.botwithus.rs3.cache.assets.npcs.NpcLoader;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;

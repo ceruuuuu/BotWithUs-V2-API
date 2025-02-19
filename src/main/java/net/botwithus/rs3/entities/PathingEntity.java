@@ -1,15 +1,16 @@
 package net.botwithus.rs3.entities;
 
+import net.botwithus.rs3.entities.types.EntityType;
+import net.botwithus.rs3.entities.types.HeadbarType;
+import net.botwithus.rs3.entities.types.HitmarkType;
 import net.botwithus.rs3.minimenu.Action;
-import net.botwithus.rs3.minimenu.Interactive;
+import net.botwithus.rs3.minimenu.Interactable;
 import net.botwithus.rs3.minimenu.MiniMenu;
 
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
-public abstract class PathingEntity extends Entity implements Interactive {
+public abstract class PathingEntity extends Entity implements Interactable {
 
     private static final Logger log = Logger.getLogger(PathingEntity.class.getName());
 
@@ -63,12 +64,20 @@ public abstract class PathingEntity extends Entity implements Interactive {
         return headbars.get(id);
     }
 
+    public Headbar getHeadbar(HeadbarType type) {
+        return getHeadbar(type.getId());
+    }
+
     public Collection<Headbar> getHeadbars() {
         return headbars.values();
     }
 
     public Hitmark getHitmark(int id) {
         return hitmarks.get(id);
+    }
+
+    public Hitmark getHitmark(HitmarkType type) {
+        return getHitmark(type.getId());
     }
 
     public Collection<Hitmark> getHitmarks() {
@@ -103,8 +112,12 @@ public abstract class PathingEntity extends Entity implements Interactive {
         return typeId;
     }
 
+    public List<SpotAnimation> getSpotAnimations() {
+        return Collections.unmodifiableList(spotAnimations);
+    }
+
     @Override
-    public final List<String> getOptions() {
+    public List<String> getOptions() {
         return Collections.emptyList();
     }
 
@@ -146,15 +159,5 @@ public abstract class PathingEntity extends Entity implements Interactive {
             return false;
         }
         return MiniMenu.doAction(action, getIndex(), 0, 0);
-    }
-
-    @Override
-    public final boolean interact(Pattern pattern) {
-        // Used to be interact(i + 1) but it wasn't consistent with the other ones, so I'm assuming that was a mistake
-        return interact(opt -> pattern.matcher(opt).matches());
-    }
-
-    public List<SpotAnimation> getSpotAnimations() {
-        return Collections.unmodifiableList(spotAnimations);
     }
 }

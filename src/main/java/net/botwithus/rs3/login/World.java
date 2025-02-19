@@ -1,8 +1,8 @@
 package net.botwithus.rs3.login;
 
-import net.botwithus.rs3.login.internal.MutableGameWorld;
+import net.botwithus.rs3.login.internal.MutableWorld;
 
-public sealed abstract class GameWorld permits MutableGameWorld {
+public sealed abstract class World permits MutableWorld {
 
     protected int worldId;
     protected int population;
@@ -10,7 +10,7 @@ public sealed abstract class GameWorld permits MutableGameWorld {
     protected int ping;
     protected String activity;
 
-    public int getWorldId() {
+    public int getId() {
         return worldId;
     }
 

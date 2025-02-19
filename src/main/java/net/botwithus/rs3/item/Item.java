@@ -4,32 +4,36 @@ import net.botwithus.rs3.cache.assets.ConfigManager;
 import net.botwithus.rs3.cache.assets.items.ItemDefinition;
 import net.botwithus.rs3.cache.assets.items.StackType;
 import net.botwithus.rs3.interfaces.Component;
+import net.botwithus.rs3.interfaces.InterfaceAddress;
+import net.botwithus.rs3.interfaces.InterfaceManager;
 import net.botwithus.rs3.item.internal.MutableItem;
-import net.botwithus.rs3.minimenu.Interactive;
+import net.botwithus.rs3.minimenu.Interactable;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
-public sealed abstract class Item implements Interactive permits InventoryItem, MutableItem {
+public sealed abstract class Item implements Interactable permits InventoryItem, MutableItem {
 
     private static final Logger log = Logger.getLogger(Item.class.getName());
+
+    private final InterfaceAddress address;
 
     protected int id;
     protected int quantity;
 
     private Component component;
 
-    public Item(int id, int amount, Component component) {
+    public Item(int id, int amount, InterfaceAddress address) {
         this.id = id;
         this.quantity = amount;
-        this.component = component;
+        this.address = address;
     }
 
     public Item(int id, int amount) {
-        this(id, amount, null);
+        this(id, amount, InterfaceAddress.INVALID);
     }
 
     public int getId() {
@@ -40,47 +44,29 @@ public sealed abstract class Item implements Interactive permits InventoryItem, 
         return quantity;
     }
 
-    public ItemDefinition getType() {
-        return ConfigManager.getItemProvider().provide(id);
+    public ItemDefinition getDefinition() {
+        return id == -1 ? null : ConfigManager.getItemProvider().provide(id);
     }
 
     public int getCategory() {
-        if(id == -1) {
-            return -1;
-        }
-        ItemDefinition type = getType();
-        if(type == null) {
-            return -1;
-        }
-        return type.getCategory();
+        ItemDefinition definition = getDefinition();
+        return definition == null ? -1 : definition.getCategory();
     }
 
     public String getName() {
-        if(id == -1) {
-            return "";
-        }
-        ItemDefinition type = getType();
-        if(type == null) {
-            return "";
-        }
-        return type.getName();
+        ItemDefinition definition = getDefinition();
+        return definition == null ? "" : definition.getName();
     }
 
     public StackType getStackType() {
-        if(id == -1) {
-            return StackType.NEVER;
-        }
-        ItemDefinition type = getType();
-        if(type == null) {
-            return StackType.NEVER;
-        }
-        return type.getStackability();
+        ItemDefinition definition = getDefinition();
+        return definition == null ? StackType.NEVER : definition.getStackability();
     }
 
     public Component getComponent() {
-        // Lazy-load to prevent the extra overhead from interfaces by default
         if (component == null) {
-            // Impl to be determined
+            // Lazy-load to prevent the extra overhead from interfaces by default
+            component = InterfaceManager.getComponent(address);
         }
         return component;
     }
@@ -88,10 +74,9 @@ public sealed abstract class Item implements Interactive permits InventoryItem, 
     @Override
     public List<String> getOptions() {
         Component component = getComponent();
-        if (component == null) {
-            return Collections.emptyList();
-        }
-        return component.getOptions();
+        return component == null ? Optional.ofNullable(getDefinition())
+                .map(ItemDefinition::getBackpackOptions)
+                .orElse(Collections.emptyList()) : component.getOptions();
     }
 
     @Override

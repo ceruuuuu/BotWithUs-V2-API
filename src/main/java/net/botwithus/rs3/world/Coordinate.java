@@ -2,9 +2,15 @@ package net.botwithus.rs3.world;
 
 public record Coordinate(int x, int y, int z) implements Locatable {
 
+    public static final Coordinate ZERO = new Coordinate(0, 0, 0);
+
+    public Coordinate(int x, int y) {
+        this(x, y, 0);
+    }
+
     @Override
-    public Area getArea() {
-        return new Area.Singular(this);
+    public Coordinate getCoordinate() {
+        return this;
     }
 
     public int getRegionX() {
@@ -46,4 +52,7 @@ public record Coordinate(int x, int y, int z) implements Locatable {
         return new Coordinate(this.x + xOffset, this.y + yOffset, this.z + planeOffset);
     }
 
+    public Coordinate derive(int xOffset, int yOffset) {
+        return derive(xOffset, yOffset, 0);
+    }
 }

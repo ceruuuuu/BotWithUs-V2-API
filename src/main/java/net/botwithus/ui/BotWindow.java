@@ -8,7 +8,6 @@ import net.botwithus.scripts.RepositoryRegistry;
 import net.botwithus.scripts.Script;
 import net.botwithus.scripts.ScriptRepository;
 import net.botwithus.scripts.repositories.LocalRepository;
-import net.botwithus.ui.workspace.ExtInfo;
 import net.botwithus.ui.workspace.Workspace;
 import net.botwithus.ui.workspace.WorkspaceExtension;
 

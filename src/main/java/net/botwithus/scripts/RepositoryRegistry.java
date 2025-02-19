@@ -2,7 +2,10 @@ package net.botwithus.scripts;
 
 import net.botwithus.scripts.repositories.LocalRepository;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Optional;
+import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class RepositoryRegistry {

@@ -1,39 +1,38 @@
 package net.botwithus.rs3.world;
 
-public record Direction(float dirX, float dirY, float dirZ) {
-    public boolean facing(Coordinate position, Coordinate position1) {
-        // Vector from position to position1
-        float segmentX = position1.x() - position.x();
-        float segmentY = position1.y() - position.y();
-        float segmentZ = position1.z() - position.z();
+public enum Direction {
+    NORTH,
+    NORTH_EAST,
+    EAST,
+    SOUTH_EAST,
+    SOUTH,
+    SOUTH_WEST,
+    WEST,
+    NORTH_WEST;
 
-        // Normalize the direction vector
-        float dirMagnitude = (float) Math.sqrt(dirX * dirX + dirY * dirY + dirZ * dirZ);
-        float normDirX = dirX / dirMagnitude;
-        float normDirY = dirY / dirMagnitude;
-        float normDirZ = dirZ / dirMagnitude;
-
-        // Normalize the segment vector
-        float segmentMagnitude = (float) Math.sqrt(segmentX * segmentX + segmentY * segmentY + segmentZ * segmentZ);
-        float normSegmentX = segmentX / segmentMagnitude;
-        float normSegmentY = segmentY / segmentMagnitude;
-        float normSegmentZ = segmentZ / segmentMagnitude;
-
-        // Calculate the dot product of the normalized vectors
-        float dotProduct = normDirX * normSegmentX + normDirY * normSegmentY + normDirZ * normSegmentZ;
-
-        // Check if the dot product is positive, indicating the vectors are aligned
-        return dotProduct > 0;
+    public static Direction of(int degrees) {
+        int angle = (degrees / 45) * 45;
+        return switch (angle) {
+            case 0 -> NORTH;
+            case 45 -> NORTH_EAST;
+            case 90 -> EAST;
+            case 135 -> SOUTH_EAST;
+            case 215 -> SOUTH;
+            case 275 -> SOUTH_WEST;
+            case 315 -> NORTH_WEST;
+            default -> null;
+        };
     }
 
-    public Rotation getRotation() {
-        // Calculate yaw (rotation around Y-axis)
-        float yaw = (float) Math.toDegrees(Math.atan2(dirZ, dirX)) - 90;
+    public static Direction of(Locatable l1, Locatable l2) {
+        if (l1 == null || l2 == null) {
+            return null;
+        }
 
-        // Calculate pitch (rotation around X-axis)
-        float pitch = (float) Math.toDegrees(Math.atan2(dirY, Math.sqrt(dirX * dirX + dirZ * dirZ)));
+        Coordinate src = l1.getCoordinate();
+        Coordinate dst = l2.getCoordinate();
 
-        // Return rotation angles
-        return new Rotation(pitch, yaw);
+        int degrees = 90 - (int) (Math.round(Math.toDegrees(Math.atan2(dst.y() - src.y(), dst.x() - src.x())) + 360) % 360);
+        return of(degrees);
     }
 }

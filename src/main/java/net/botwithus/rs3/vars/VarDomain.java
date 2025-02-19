@@ -3,7 +3,6 @@ package net.botwithus.rs3.vars;
 import net.botwithus.rs3.cache.assets.ConfigManager;
 import net.botwithus.rs3.cache.assets.providers.VarBitProvider;
 import net.botwithus.rs3.cache.assets.vars.VarBitType;
-import net.botwithus.services.ServiceProvider;
 
 import java.util.Optional;
 import java.util.ServiceLoader;

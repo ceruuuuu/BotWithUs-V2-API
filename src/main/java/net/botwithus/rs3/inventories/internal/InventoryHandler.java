@@ -1,8 +1,9 @@
 package net.botwithus.rs3.inventories.internal;
 
-import net.botwithus.rs3.inventories.Inventory;
-
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class InventoryHandler {
     public static final Map<Integer, MutableInventory> INVENTORIES = new HashMap<>();

@@ -3,8 +3,9 @@ package net.botwithus.rs3.entities;
 import net.botwithus.rs3.cache.assets.ConfigManager;
 import net.botwithus.rs3.cache.assets.so.SceneObjectDefinition;
 import net.botwithus.rs3.entities.internal.MutableSceneObject;
+import net.botwithus.rs3.entities.types.EntityType;
 import net.botwithus.rs3.minimenu.Action;
-import net.botwithus.rs3.minimenu.Interactive;
+import net.botwithus.rs3.minimenu.Interactable;
 import net.botwithus.rs3.minimenu.MiniMenu;
 import net.botwithus.rs3.vars.VarDomain;
 
@@ -13,9 +14,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
-public sealed abstract class SceneObject extends Entity implements Interactive permits MutableSceneObject {
+public sealed abstract class SceneObject extends Entity implements Interactable permits MutableSceneObject {
     private static final Logger log = Logger.getLogger(SceneObject.class.getName());
 
     protected int typeId;
@@ -82,11 +82,11 @@ public sealed abstract class SceneObject extends Entity implements Interactive p
 
     @Override
     public List<String> getOptions() {
-        SceneObjectDefinition type = getMultiType();
-        if (type == null) {
+        SceneObjectDefinition definition = getMultiType();
+        if (definition == null) {
             return Collections.emptyList();
         }
-        return Arrays.stream(type.getOptions()).toList();
+        return Arrays.asList(definition.getOptions());
     }
 
     @Override

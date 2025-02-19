@@ -2,9 +2,9 @@ package net.botwithus.ui.debug;
 
 import net.botwithus.imgui.ImFlags;
 import net.botwithus.imgui.ImGui;
-import net.botwithus.rs3.login.GameWorld;
+import net.botwithus.rs3.login.World;
 import net.botwithus.rs3.login.LoginManager;
-import net.botwithus.rs3.world.World;
+import net.botwithus.rs3.login.Worlds;
 import net.botwithus.ui.workspace.ExtInfo;
 import net.botwithus.ui.workspace.Workspace;
 import net.botwithus.ui.workspace.WorkspaceExtension;
@@ -35,7 +35,7 @@ public final class GameWorldDebug implements WorkspaceExtension {
 
                     ImGui.tableHeadersRow();
 
-                    for (GameWorld world : LoginManager.getGameWorlds().stream().sorted(Comparator.comparingInt(GameWorld::getWorldId)).toList()) {
+                    for (World world : Worlds.getLoaded().stream().sorted(Comparator.comparingInt(World::getWorldId)).toList()) {
 
                         if(isMemberFilter && !world.isMembers()) {
                             continue;

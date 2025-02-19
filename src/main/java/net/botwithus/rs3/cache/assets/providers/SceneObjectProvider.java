@@ -5,8 +5,8 @@ import net.botwithus.rs3.cache.ArchiveFile;
 import net.botwithus.rs3.cache.Filesystem;
 import net.botwithus.rs3.cache.ReferenceTable;
 import net.botwithus.rs3.cache.assets.ConfigProvider;
-import net.botwithus.rs3.cache.assets.so.SceneObjectLoader;
 import net.botwithus.rs3.cache.assets.so.SceneObjectDefinition;
+import net.botwithus.rs3.cache.assets.so.SceneObjectLoader;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;

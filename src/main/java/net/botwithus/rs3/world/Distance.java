@@ -1,78 +1,67 @@
 package net.botwithus.rs3.world;
 
-
 import net.botwithus.rs3.entities.LocalPlayer;
-import net.botwithus.rs3.world.Area;
-import net.botwithus.rs3.world.Coordinate;
-import net.botwithus.rs3.world.Locatable;
 
-public class Distance {
+import java.util.function.BiFunction;
+
+public enum Distance {
+
+    EUCLIDIAN(Distance::euclidean),
+    MANHATTAN(Distance::manhattan),
+    CHEBYSHEV(Distance::chebyshev);
+
+    private final BiFunction<Coordinate, Coordinate, Double> algorithm;
+
+    Distance(BiFunction<Coordinate, Coordinate, Double> algorithm) {
+        this.algorithm = algorithm;
+    }
+
     /**
      * Gets the distance between two Locatable entities that exist on the world graph.
      * If either Locatable is not on the world graph or they're on different Z levels, the method returns Double.NaN.
      *
-     * @param first  a non-null Locatable on the world graph.
-     * @param second a different non-null Locatable on the world graph.
+     * @param from      a Locatable on the world graph to act as the source.
+     * @param to        a Locatable on the world graph as the destination.
+     * @param metric an optional algorithm to use (defaults to Distance#EUCLIDIAN)
      * @return The distance between the two Locatables, or Double.NaN if either Locatable is not on the world graph or they're on different Z levels.
      */
-    public static double between(Locatable first, Locatable second) {
-        Area area1 = first.getArea();
-        if (area1 == null) {
+    public static double between(Locatable from, Locatable to, Distance metric) {
+        if (from == null || to == null) {
             return Double.NaN;
         }
-        Area area2 = second.getArea();
-        if (area2 == null) {
+        Coordinate pos1 = from.getCoordinate();
+        Coordinate pos2 = to.getCoordinate();
+        if (pos1.z() != pos2.z()) {
             return Double.NaN;
         }
-        Coordinate center1 = area1.getCentroid();
-        if (center1 == null) {
-            return Double.NaN;
-        }
-        Coordinate center2 = area2.getCentroid();
-        if (center2 == null) {
-            return Double.NaN;
-        }
-        if (center1.z() != center2.z()) {
-            return Double.NaN;
-        }
-        return between(center1.x(), center1.y(), center2.x(), center2.y());
+        return metric.algorithm.apply(pos1, pos2);
     }
 
-    /**
-     * Gets the euclidean distance between the two sets of (x,y) points.
-     *
-     * @param x1 The x-coordinate of the first point.
-     * @param y1 The y-coordinate of the first point.
-     * @param x2 The x-coordinate of the second point.
-     * @param y2 The y-coordinate of the second point.
-     * @return The Euclidean distance between the two points.
-     */
-    public static double between(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
+    public static double between(Locatable from, Locatable to) {
+        return between(from, to, Distance.EUCLIDIAN);
     }
 
-    /**
-     * Gets the euclidean distance between the local player and {@param other} assuming they're on the same plane/z-level.
-     *
-     * @param other A locatable that exists on the world graph.
-     * @return The euclidean distance between the local player and {@param other} in 2d space, or Double.NaN if it can't be determined.
-     */
-    public static double to(Locatable other) {
-        var self = LocalPlayer.self();
-        if (self == null) {
-            return Double.NaN;
-        }
-        Coordinate coord = self.getCoordinate();
-        if (coord == null) {
-            return Double.NaN;
-        }
-        Coordinate coord2 = other.getCoordinate();
-        if (coord2 == null) {
-            return Double.NaN;
-        }
-        if (coord.z() != coord2.z()) {
-            return Double.NaN;
-        }
-        return between(self, other);
+    public static double to(Locatable to, Distance metric) {
+        return between(LocalPlayer.self(), to, metric);
+    }
+
+    public static double to(Locatable to) {
+        return between(LocalPlayer.self(), to, Distance.EUCLIDIAN);
+    }
+
+    private static double euclidean(Coordinate pos1, Coordinate pos2) {
+        return Math.hypot(pos2.x() - pos1.x(), pos2.y() - pos1.y());
+    }
+
+    private static double euclideanSquared(Coordinate pos1, Coordinate pos2) {
+        return Math.sqrt(Math.pow(pos1.x() - pos2.x(), 2) + Math.pow(pos1.y() - pos2.y(), 2));
+    }
+
+    private static double manhattan(Coordinate pos1, Coordinate pos2) {
+        return Math.abs(pos1.x() - pos2.x()) + Math.abs(pos1.y() - pos2.y());
+    }
+
+    private static double chebyshev(Coordinate pos1, Coordinate pos2) {
+        return Math.max(Math.abs(pos1.x() - pos2.x()), Math.abs(pos1.y() - pos2.y()));
     }
 }

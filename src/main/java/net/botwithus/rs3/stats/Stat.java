@@ -23,7 +23,7 @@ public sealed abstract class Stat permits MutableStat {
         return level;
     }
 
-    public int getXp() {
+    public int getExperience() {
         return xp;
     }
 

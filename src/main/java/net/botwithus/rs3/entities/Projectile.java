@@ -1,6 +1,7 @@
 package net.botwithus.rs3.entities;
 
 import net.botwithus.rs3.entities.internal.MutableProjectile;
+import net.botwithus.rs3.entities.types.EntityType;
 import net.botwithus.rs3.world.Coordinate;
 
 public abstract sealed class Projectile extends Entity permits MutableProjectile {

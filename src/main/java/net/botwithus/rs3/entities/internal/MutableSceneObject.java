@@ -1,10 +1,10 @@
 package net.botwithus.rs3.entities.internal;
 
-import net.botwithus.rs3.entities.EntityType;
 import net.botwithus.rs3.entities.SceneObject;
+import net.botwithus.rs3.entities.types.EntityType;
 import net.botwithus.rs3.world.Area;
-import net.botwithus.rs3.world.Direction;
 import net.botwithus.rs3.world.Coordinate;
+import net.botwithus.rs3.world.Direction;
 
 public final class MutableSceneObject extends SceneObject {
     public MutableSceneObject(EntityType type) {

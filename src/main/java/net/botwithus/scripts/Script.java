@@ -8,7 +8,6 @@ import net.botwithus.ui.workspace.Workspace;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ServiceLoader;
-import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

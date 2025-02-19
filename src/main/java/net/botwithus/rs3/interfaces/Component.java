@@ -4,14 +4,13 @@ import net.botwithus.rs3.cache.assets.ConfigManager;
 import net.botwithus.rs3.cache.assets.params.ParamDefinition;
 import net.botwithus.rs3.interfaces.internal.MutableComponent;
 import net.botwithus.rs3.minimenu.Action;
-import net.botwithus.rs3.minimenu.Interactive;
+import net.botwithus.rs3.minimenu.Interactable;
 import net.botwithus.rs3.minimenu.MiniMenu;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.regex.Pattern;
 
-public sealed abstract class Component implements Interactive permits MutableComponent {
+public sealed abstract class Component implements Interactable permits MutableComponent {
 
     protected Interface root;
 

@@ -1,14 +1,14 @@
 package net.botwithus.rs3.client.internal;
 
 import net.botwithus.rs3.client.Client;
-import net.botwithus.rs3.client.StateChange;
+import net.botwithus.rs3.client.StateTransition;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public final class MutableClient extends Client {
 
-    public static final Queue<StateChange> STATE_CHANGES = new ConcurrentLinkedQueue<>();
+    public static final Queue<StateTransition> STATE_CHANGES = new ConcurrentLinkedQueue<>();
 
     public static int CLIENT_CYCLE = 0;
 

@@ -1,6 +1,6 @@
 package net.botwithus.rs3.entities;
 
-import net.botwithus.rs3.world.Direction;
+import net.botwithus.rs3.entities.types.EntityType;
 import net.botwithus.rs3.world.Coordinate;
 import net.botwithus.rs3.world.Locatable;
 import net.botwithus.rs3.world.Rotation;
@@ -10,7 +10,7 @@ public abstract class Entity implements Locatable {
     protected EntityType type;
     protected Coordinate coordinate;
 
-    protected Direction direction;
+    protected Rotation rotation;
 
     protected boolean isValid;
 
@@ -26,16 +26,15 @@ public abstract class Entity implements Locatable {
         return coordinate;
     }
 
-    public Direction getDirection() {
-        return direction;
+    public Rotation getRotation() {
+        return rotation;
     }
 
-    public Rotation getRotation() {
-        return direction.getRotation();
+    public int getOrientation() {
+        return rotation.angular();
     }
 
     public boolean isValid() {
         return isValid;
     }
-
 }
